@@ -4,12 +4,17 @@ exports.createRestaurant = async (req, res) => {
   try {
     const { name, phoneNumber, address } = req.body;
 
+    if (phoneNumber.length != 10) {
+      throw new Error("Phone Number must be of Length 10");
+    }
+
     const result = await Restaurant.create({ name, phoneNumber, address });
 
     res.status(200).json({
       status: "success",
       data: result,
     });
+
   } catch (err) {
     return res.status(400).json({
       status: "fail",
@@ -42,7 +47,6 @@ exports.getRestaurantById = async (req, res) => {
 };
 
 exports.getAllRestaurant = async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
   try {
     const result = await Restaurant.find();
 

@@ -4,6 +4,7 @@ const cors = require('cors')
 const app = express();
 const foodRoutes = require("./routes/foodRoute");
 const restaurantRoutes = require("./routes/restaurantRoutes");
+const orderRoutes = require('./routes/orderRoute')
 
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
@@ -21,8 +22,8 @@ mongoose
   .then(() => console.log("DB connection successful!"));
 
 app.use("/api/v1/food", foodRoutes);
-
 app.use("/api/v1/restaurant", restaurantRoutes);
+app.use("/api/v1/order", orderRoutes);
 
 app.all("*", (req, res) => {
   return res.status(404).json({

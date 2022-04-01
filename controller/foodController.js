@@ -3,18 +3,16 @@ const Restaurant = require("./../models/restaurantModel");
 
 
 exports.getAllFoods = async (req, res) => {
-  
-  res.set('Access-Control-Allow-Origin', '*');
   try {
-      const result = await foodModel.find(); 
-      res.status(200).json({
-        status: "success", 
-        data: result
-      })
-  }catch(err){
+    const result = await foodModel.find();
+    res.status(200).json({
+      status: "success",
+      data: result
+    })
+  } catch (err) {
     return res.status(400).json({
-      status: "fail", 
-      message: err.message, 
+      status: "fail",
+      message: err.message,
     })
   }
 }
@@ -23,8 +21,6 @@ exports.getAllFoods = async (req, res) => {
 
 
 exports.getFoodbyName = async (req, res) => {
-
-  res.set('Access-Control-Allow-Origin', '*');
   try {
     const { name } = req.body;
     const result = await foodModel.findOne({ name });
@@ -49,8 +45,6 @@ exports.getFoodbyName = async (req, res) => {
 };
 
 exports.getFoodbyCategory = async (req, res) => {
-
-  res.set('Access-Control-Allow-Origin', '*');
   try {
     const { category } = req.body;
     const result = await foodModel.find({ category });
@@ -77,10 +71,7 @@ exports.getFoodbyCategory = async (req, res) => {
 
 
 exports.createItem = async (req, res) => {
-  console.log(req.body)
-  let result = " "
   try {
-  
     const {
       name,
       restaurant,
@@ -91,43 +82,32 @@ exports.createItem = async (req, res) => {
       price,
     } = req.body;
 
-    
-    // if (
-    //   name &&  //  
-    //   category &&    // 
-    //   price &&
-    //   restaurant
-    // ) {
+    const hotel = Restaurant.findOne({ name: restaurant })
+    const result = await foodModel.create({
+      name,
+      hotel,
+      category,
+      description,
+      img,
+      story,
+      price
+    });
 
-      const hotel = Restaurant.findOne({name : restaurant})
-      // console.log("Where is issue")
-      result = await foodModel.create({
-        name,
-        hotel,
-        category,
-        description,
-        img,
-        story,
-        price
+    if (result) {
+      return res.status(201).json({
+        status: "success",
+        data: result,
       });
-      // console.log(result)
-    
-
-      if (result) {
-        return res.status(201).json({
-          status: "success",
-          data: result,
-        });
-      }
-    // }
+    }
 
     res.status(400).json({
       status: "fail",
       message: "Insufficient Data Given",
     });
+
   } catch (err) {
     return res.status(400).json({
-       messageE: result, 
+      messageE: result,
       status: "fail",
       message: err.message,
     });
@@ -135,8 +115,6 @@ exports.createItem = async (req, res) => {
 };
 
 exports.updateItemById = async (req, res) => {
-
-  res.set('Access-Control-Allow-Origin', '*');
   try {
     const { name, restaurant, category, description, price } = req.body;
 
@@ -161,8 +139,6 @@ exports.updateItemById = async (req, res) => {
 };
 
 exports.deleteItem = async (req, res) => {
-
-  res.set('Access-Control-Allow-Origin', '*');
   try {
     const result = await foodModel.findByIdAndDelete(req.params.id);
 
@@ -185,8 +161,6 @@ exports.deleteItem = async (req, res) => {
 };
 
 exports.mapFoodRestaurant = async (req, res) => {
-
-  res.set('Access-Control-Allow-Origin', '*');
   try {
     const { foodId, restaurantId } = req.body;
     const restaurant = await Restaurant.findById(restaurantId);
@@ -198,7 +172,7 @@ exports.mapFoodRestaurant = async (req, res) => {
     }
     const mapFood = await foodModel.findByIdAndUpdate(
       foodId,
-      { restaurant },
+      { restaurant: restaurantId },
       { new: true }
     );
 

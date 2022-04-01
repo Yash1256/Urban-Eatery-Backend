@@ -11,6 +11,7 @@ const foodSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Restaurant",
   },
+  quantity: Number,
 });
 
 const Food = mongoose.model("Food", foodSchema, "Food Model");
