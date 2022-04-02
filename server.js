@@ -8,6 +8,37 @@ const foodRoutes = require("./routes/foodRoute");
 const restaurantRoutes = require("./routes/restaurantRoutes");
 const orderRoutes = require("./routes/orderRoute")
 
+//Morgan 
+var morgan = require('morgan');
+//const fs = require('fs');
+//const path = require('path');
+const fsr = require('file-stream-rotator');
+
+//Swagger Doc
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
+
+
+morgan.token('host', function(req, res){
+  return req.hostname;
+})
+morgan.token("wbdaccess", "User trying to access the :url");
+
+let logsinfo = fsr.getStream({filename:"logs/test.log", frequency:"1h", verbose: true});
+
+app.use(morgan('wbdaccess', {stream: logsinfo}))
+
+
+
+app.listen(3000);
+
+//End Swagger and Morgan
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

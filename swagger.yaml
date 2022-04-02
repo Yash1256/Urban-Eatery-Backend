@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: "Food Delivery Backend APIs"
+  version: 0.1.9
+  description: "This is our Food Delivery's App Server."
+  version: "1.0.0"
+  contact:
+    email: "abhishsusu@gmail.com"
+servers:
+  - url: http://localhost:8000/api/v1//
+    description: Locally Hosted
+  - url: https://urbaan-eatery.herokuapp.com/api/v1// 
+    description: Our Hosted Server
+tags:
+- name: "Foods"
+  description: "Everything About our Foods"
+- name: "Restaurant"
+  description: "Everything About Restaurants"
+- name: "Orders"
+  description: "Everything About Our Orders "
+paths:
+  food/getallfoods:
+    get:  
+      tags:
+      - "Foods"
+      summary: Returns a list of all foods.
+      description: It returns us with all the foods that are present.
+      operationId: "getAllFoods"
+      responses:
+        '200':    # status code 
+          description: A JSON array of food items
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+        '400':
+          description: "Invalid status value"
+  food/createItem:
+    post:
+      tags:
+      - "Foods"
+      summary: "Add a new Food to the store"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Food object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Food"
+      responses:
+        "405":
+          description: "Invalid input"
+  deleteItem/{id}:
+    delete:
+      tags:
+      - "Foods"
+      summary: "Deletes a Food"
+      parameters:
+      - name: "FoodId"
+        in: "path"
+        description: "Food id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Food not found"
+
+  restaurant/getAllRestaurant:
+    get:  
+      tags:
+      - "Restaurant"
+      summary: Returns a list of all Restaurants.
+      description: It returns us with all the Restaurants that are present.
+      operationId: "getAllRestaurants"
+      responses:
+        '200':    # status code 
+          description: A JSON array of Restaurants
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+        '400':
+          description: "Invalid status value"
+  restaurant/createRestaurant:
+    post:
+      tags:
+      - "Restaurant"
+      summary: "Add a new Restaurant to the store"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Restaurant object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Food"
+      responses:
+        "405":
+          description: "Invalid input"
+  deleteRestaurant/{id}:
+    delete:
+      tags:
+      - "Restaurant"
+      summary: "Deletes a Restaurant"
+      parameters:
+      - name: "RestId"
+        in: "path"
+        description: "Restaurant id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Food not found"
+  
+  order/pastOrders:
+    get:  
+      tags:
+      - "Orders"
+      summary: Returns a list of all Past orders.
+      description: It returns us with all the Past Orders that are present.
+      operationId: "getAllPastOrders"
+      responses:
+        '200':    # status code 
+          description: A JSON array of Past orders
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+        '400':
+          description: "Invalid status value"
+  order/placeOrder:
+    post:
+      tags:
+      - "Orders"
+      summary: "Add a new Order to the store"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Order object that needs to be Placed"
+        required: true
+        schema:
+          $ref: "#/definitions/Food"
+      responses:
+        "405":
+          description: "Invalid input"
+  definitions:
+    Food:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        format: "int64"
+      restaurant:
+        type: "string"
+        format: "int64"
+      category:
+        type: "string"
+        format: "int32"
+      description:
+        type: "string"
+        format: "date-time"
+      
