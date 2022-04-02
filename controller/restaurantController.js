@@ -1,4 +1,5 @@
 const Restaurant = require("./../models/restaurantModel");
+const bson = require('bson')
 
 exports.createRestaurant = async (req, res) => {
   try {
@@ -8,12 +9,20 @@ exports.createRestaurant = async (req, res) => {
       throw new Error("Phone Number must be of Length 10");
     }
 
-    const result = await Restaurant.create({ name, phoneNumber, address });
+    if (name && address) {
+      const result = await Restaurant.create({ name, phoneNumber, address });
 
-    res.status(200).json({
-      status: "success",
-      data: result,
-    });
+
+      return res.status(200).json({
+        status: "success",
+        data: result,
+      });
+    }
+
+    res.status(400).json({
+      status: "fail",
+      message: "Missing required Fields"
+    })
 
   } catch (err) {
     return res.status(400).json({
@@ -115,10 +124,41 @@ exports.deleteRestaurant = async (req, res) => {
 
 exports.displayRestaurantFood = async (req, res) => {
   try {
-    const result = await Restaurant.findById(req.params.id).populate(
-      "restaurantFoods",
-      "name category description story"
-    );
+    const result = await Restaurant.aggregate([
+      {
+        $match: { _id: new bson.ObjectId(req.params.id) },
+      },
+      {
+        $lookup: {
+          from: "Food Model",
+          let: { id: "$_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$$id", "$restaurant"]
+                }
+              }
+            },
+            {
+              $project: {
+                name: "$name",
+                category: "$category",
+                description: "$description",
+                story: "$story",
+                price: "$price"
+              }
+            }
+          ],
+          as: "foodItems"
+        }
+      },
+      {
+        $project: {
+          foodItems: 1,
+        }
+      }
+    ])
 
     if (!result) {
       return res.status(404).json({

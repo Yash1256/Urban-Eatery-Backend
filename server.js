@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const foodRoutes = require("./routes/foodRoute");
 const restaurantRoutes = require("./routes/restaurantRoutes");
+const orderRoutes = require("./routes/orderRoute")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -16,6 +17,8 @@ app.use(cors());
 
 const DB = process.env.DB;
 
+console.log(DB)
+
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -23,8 +26,8 @@ mongoose
   .then(() => console.log("DB connection successful!"));
 
 app.use("/api/v1/food", foodRoutes);
-
 app.use("/api/v1/restaurant", restaurantRoutes);
+app.use("/api/v1/order", orderRoutes);
 
 app.all("*", (req, res) => {
   return res.status(404).json({

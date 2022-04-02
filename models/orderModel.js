@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
         ref: "Restaurant",
     },
     foodItems: [{
-        name: {
+        itemId: {
             type: mongoose.Schema.ObjectId,
             ref: "Food",
         },
@@ -27,6 +27,6 @@ const orderSchema = new mongoose.Schema({
     }
 });
 
-const Food = mongoose.model("Food", orderSchema, "Food Model");
+const Order = mongoose.model("Order", orderSchema, "Order Model");
 
-module.exports = Food;
+module.exports = Order;

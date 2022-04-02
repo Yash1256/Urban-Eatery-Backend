@@ -82,10 +82,15 @@ exports.createItem = async (req, res) => {
       price,
     } = req.body;
 
-    const hotel = Restaurant.findOne({ name: restaurant })
+    const hotel = Restaurant.findById(restaurant)
+
+    if (!hotel) {
+      throw new Error("No such Restaurant Exists!!");
+    }
+
     const result = await foodModel.create({
       name,
-      hotel,
+      restaurant,
       category,
       description,
       img,
