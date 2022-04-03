@@ -17,13 +17,10 @@ exports.getAllFoods = async (req, res) => {
   }
 }
 
-
-
-
-exports.getFoodbyName = async (req, res) => {
+exports.getFoodById = async (req, res) => {
   try {
-    const { name } = req.body;
-    const result = await foodModel.findOne({ name });
+    const { id } = req.params;
+    const result = await foodModel.findById(id);
 
     if (result) {
       return res.status(200).json({
@@ -80,6 +77,7 @@ exports.createItem = async (req, res) => {
       img,
       story,
       price,
+      quantity,
     } = req.body;
 
     const hotel = Restaurant.findById(restaurant)
@@ -95,7 +93,8 @@ exports.createItem = async (req, res) => {
       description,
       img,
       story,
-      price
+      price,
+      quantity,
     });
 
     if (result) {
@@ -112,7 +111,7 @@ exports.createItem = async (req, res) => {
 
   } catch (err) {
     return res.status(400).json({
-      messageE: result,
+      message: result,
       status: "fail",
       message: err.message,
     });
@@ -121,11 +120,11 @@ exports.createItem = async (req, res) => {
 
 exports.updateItemById = async (req, res) => {
   try {
-    const { name, restaurant, category, description, price } = req.body;
+    const { name, restaurant, category, description, price, story } = req.body;
 
     const updatedResult = await foodModel.findByIdAndUpdate(
       req.params.id,
-      { name, restaurant, category, description, price },
+      { name, restaurant, category, description, price, story },
       { new: true }
     );
 

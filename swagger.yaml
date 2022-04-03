@@ -120,7 +120,7 @@ paths:
           description: "Invalid ID supplied"
         "404":
           description: "Food not found"
-  
+
   order/pastOrders:
     get:  
       tags:
