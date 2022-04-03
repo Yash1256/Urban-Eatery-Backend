@@ -10,8 +10,6 @@ const orderRoutes = require("./routes/orderRoute")
 
 //Morgan 
 var morgan = require('morgan');
-//const fs = require('fs');
-//const path = require('path');
 const fsr = require('file-stream-rotator');
 
 //Swagger Doc
@@ -32,11 +30,6 @@ morgan.token("wbdaccess", "User trying to access the :url");
 let logsinfo = fsr.getStream({filename:"logs/test.log", frequency:"1h", verbose: true});
 
 app.use(morgan('wbdaccess', {stream: logsinfo}))
-
-
-
-app.listen(3000);
-
 //End Swagger and Morgan
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,7 +41,7 @@ app.use(cors());
 
 const DB = process.env.DB;
 
-console.log(DB)
+// console.log(DB)
 
 mongoose
   .connect(DB, {
