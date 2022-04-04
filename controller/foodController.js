@@ -43,7 +43,7 @@ exports.getFoodById = async (req, res) => {
 
 exports.getFoodbyCategory = async (req, res) => {
   try {
-    const { category } = req.body;
+    const { category } = req.params;
     const result = await foodModel.find({ category });
 
     if (result.length > 0) {
