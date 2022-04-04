@@ -2,6 +2,9 @@
   {
     "name": "Carrozza Cemita Pomodoro",
     "category": "sandwich",
+    "qty": 100,
+    "restaurant_name": "Sandwich Bar",
+    "restaurant": "624977e6df249825f2145512",
     "img": "https://i.imgur.com/0WwLSB4.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -10,6 +13,9 @@
   {
     "name": "Broodje kroket Beef",
     "category": "sandwich",
+    "qty": 100,
+    "restaurant_name": "Sandwich Bar",
+    "restaurant": "624977e6df249825f2145512",
     "img": "https://i.imgur.com/UsKSvmL.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -18,6 +24,9 @@
   {
     "name": "Bratwurst Lasagana Chicken",
     "category": "sandwich",
+    "restaurant_name": "Sandwich Bar",
+    "qty": 100,
+    "restaurant": "624977e6df249825f2145512",
     "img": "https://i.imgur.com/2NyAOaQ.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -26,6 +35,9 @@
   {
     "name": "Parmigana Al Forno",
     "category": "sandwich",
+    "restaurant_name": "Sandwich Bar",
+    "qty": 100,
+    "restaurant": "624977e6df249825f2145512",
     "img": "https://i.imgur.com/9TSlux1.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -34,6 +46,9 @@
   {
     "name": "Panini Pollo Mexicana",
     "category": "sandwich",
+    "restaurant_name": "Sandwich Bar",
+    "qty": 100,
+    "restaurant": "624977e6df249825f2145512",
     "img": "https://i.imgur.com/ocoGRN4.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -42,6 +57,9 @@
   {
     "name": "Paino Americano Fry",
     "category": "sandwich",
+    "qty": 100,
+    "restaurant_name": "Sandwich Bar",
+    "restaurant": "624977e6df249825f2145512",
     "img": "https://i.imgur.com/0nLr9NI.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",

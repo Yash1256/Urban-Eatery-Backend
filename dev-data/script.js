@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 const Food = require("./../models/foodModel");
 const Restaurant = require("./../models/restaurantModel");
 
-const DB =
-  "mongodb+srv://yash1256:yash1256@urban-eatery.wf7ld.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const DB = "mongodb+srv://nishi:TyeYEOOlJSEkeY32@cluster0.zjfve.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 mongoose
   .connect(DB, {
@@ -29,6 +28,12 @@ const sandwich = JSON.parse(
 const restaurant = JSON.parse(
   fs.readFileSync(`${__dirname}/restaurant.json`, "utf-8")
 );
+const shawarma = JSON.parse(
+  fs.readFileSync(`${__dirname}/shawarma.json`, "utf-8")
+);
+const lunch = JSON.parse(
+  fs.readFileSync(`${__dirname}/lunch.json`, "utf-8")
+);
 
 // IMPORT DATA INTO DB
 const importData = async () => {
@@ -40,7 +45,9 @@ const importData = async () => {
     await Food.create(icecream);
     await Food.create(pizza);
     await Food.create(sandwich);
-    await Restaurant.create(restaurant);
+    await Food.create(shawarma);
+    await Food.create(lunch);
+    // await Restaurant.create(restaurant);
     console.log("Data successfully loaded!");
   } catch (err) {
     console.log(err);

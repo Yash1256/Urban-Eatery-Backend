@@ -2,6 +2,9 @@
   {
     "name": "Baked Chicken Fry",
     "category": "dinner",
+    "qty": 100,
+    "restaurant": "624977e6df249825f2145517",
+    "restaurant_name": " Grill & Chill",
     "img": "https://i.imgur.com/b50xqHV.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -10,6 +13,9 @@
   {
     "name": "Lemoni Selmon Piccata",
     "category": "dinner",
+    "qty": 100,
+    "restaurant_name": " Grill & Chill",
+    "restaurant": "624977e6df249825f2145517",
     "img": "https://i.imgur.com/O0I2Rvi.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -18,6 +24,9 @@
   {
     "name": "Garlic Butter Baked Salmons",
     "category": "dinner",
+    "qty": 100,
+    "restaurant_name": " Grill & Chill",
+    "restaurant": "624977e6df249825f2145517",
     "img": "https://i.imgur.com/YNtu9XA.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -26,6 +35,9 @@
   {
     "name": "Pork Tenderloin With Quinoa",
     "category": "dinner",
+    "qty": 100,
+    "restaurant_name": " Grill & Chill",
+    "restaurant": "624977e6df249825f2145517",
     "img": "https://i.imgur.com/E6SndU9.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -34,6 +46,9 @@
   {
     "name": "Beef Tendiro Grapefruit",
     "category": "dinner",
+    "restaurant_name": " Grill & Chill",
+    "qty": 100,
+    "restaurant": "624977e6df249825f2145517",
     "img": "https://i.imgur.com/Uv5Z39E.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",
@@ -42,6 +57,9 @@
   {
     "name": "Salmon with Green salad",
     "category": "dinner",
+    "restaurant_name": " Grill & Chill",
+    "qty": 100,
+    "restaurant": "624977e6df249825f2145517",
     "img": "https://i.imgur.com/NnNC2Jj.png",
     "description": "Pecorino smellY cheese melted cheese",
     "story": "Gummi bears topping pie pastry bonbon cupcake caramels. Muffin muffin jujubes donut",

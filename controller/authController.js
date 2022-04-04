@@ -23,7 +23,7 @@ const signToken = (id) => {
 const createSendToken = (user, id, statusCode, req, res) => {
     const token = signToken(id);
     const name = user.firstName + ' ' + user.lastName;
-    let data = { name };
+    let data = { name, role: user.role };
     if (user.googleUser) {
         data.picture = user.googleUser.picture;
     }
@@ -180,7 +180,7 @@ exports.restrictTo = (...roles) => {
 exports.validateLogin = async (req, res) => {
     let userDetails = await User.findById(String(req.user)).lean();
     const name = userDetails.firstName + ' ' + userDetails.lastName;
-    let user = { name };
+    let user = { name, role: userDetails.role };
     if (userDetails.googleUser) {
         user.picture = userDetails.googleUser.picture;
     }

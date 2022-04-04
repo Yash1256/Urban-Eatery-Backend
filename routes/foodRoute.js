@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(authController.protect);
 router.get("/foodItem", foodController.getAllFoods);
 router.get("/foodItem/:id", foodController.getFoodById);
-router.post("/getFoodbyCategory", foodController.getFoodbyCategory);
+router.get("/getFoodbyCategory/:category", foodController.getFoodbyCategory);
 
 router.use(authController.restrictTo('restaurant', 'admin'));
 router.post("/foodItem", foodController.createItem);

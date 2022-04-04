@@ -43,7 +43,7 @@ exports.getFoodById = async (req, res) => {
 
 exports.getFoodbyCategory = async (req, res) => {
   try {
-    const { category } = req.body;
+    const { category } = req.params;
     const result = await foodModel.find({ category });
 
     if (result.length > 0) {
@@ -65,9 +65,8 @@ exports.getFoodbyCategory = async (req, res) => {
   }
 };
 
-
-
 exports.createItem = async (req, res) => {
+  console.log(req.body)
   try {
     const {
       name,
@@ -75,7 +74,6 @@ exports.createItem = async (req, res) => {
       category,
       description,
       img,
-      story,
       price,
       quantity,
     } = req.body;
@@ -92,7 +90,6 @@ exports.createItem = async (req, res) => {
       category,
       description,
       img,
-      story,
       price,
       quantity,
     });
@@ -111,7 +108,6 @@ exports.createItem = async (req, res) => {
 
   } catch (err) {
     return res.status(400).json({
-      message: result,
       status: "fail",
       message: err.message,
     });

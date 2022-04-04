@@ -28,6 +28,7 @@
     "multer-s3": "^2.10.0",
     "nodemon": "^2.0.15",
     "request": "^2.88.2",
+    "rotating-file-stream": "^3.0.3",
     "statuses": "^2.0.1",
     "stripe": "^8.195.0",
     "swagger-ui-express": "^4.3.0",
