@@ -1,21 +1,20 @@
 const foodModel = require("./../models/foodModel");
 const Restaurant = require("./../models/restaurantModel");
 
-
 exports.getAllFoods = async (req, res) => {
   try {
     const result = await foodModel.find();
     res.status(200).json({
       status: "success",
-      data: result
-    })
+      data: result,
+    });
   } catch (err) {
     return res.status(400).json({
       status: "fail",
       message: err.message,
-    })
+    });
   }
-}
+};
 
 exports.getFoodById = async (req, res) => {
   try {
@@ -65,8 +64,6 @@ exports.getFoodbyCategory = async (req, res) => {
   }
 };
 
-
-
 exports.createItem = async (req, res) => {
   try {
     const {
@@ -80,7 +77,7 @@ exports.createItem = async (req, res) => {
       quantity,
     } = req.body;
 
-    const hotel = Restaurant.findById(restaurant)
+    const hotel = Restaurant.findById(restaurant);
 
     if (!hotel) {
       throw new Error("No such Restaurant Exists!!");
@@ -108,7 +105,6 @@ exports.createItem = async (req, res) => {
       status: "fail",
       message: "Insufficient Data Given",
     });
-
   } catch (err) {
     return res.status(400).json({
       message: result,

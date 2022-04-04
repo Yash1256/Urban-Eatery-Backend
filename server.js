@@ -1,41 +1,46 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const HTTPErrors = require('http-errors');
-const HTTPStatuses = require('statuses');
+const HTTPErrors = require("http-errors");
+const HTTPStatuses = require("statuses");
 const foodRoutes = require("./routes/foodRoute");
 const restaurantRoutes = require("./routes/restaurantRoutes");
-const orderRoutes = require("./routes/orderRoute")
-const userRoutes = require("./routes/userRoute")
+const orderRoutes = require("./routes/orderRoute");
+const userRoutes = require("./routes/userRoute");
+const paymentRoutes = require("./routes/paymentRoute");
 
-//Morgan 
-var morgan = require('morgan');
-const fsr = require('file-stream-rotator');
+//Morgan
+var morgan = require("morgan");
+const fsr = require("file-stream-rotator");
 
 //Swagger Doc
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
 
-const swaggerDocument = YAML.load('./swagger.yaml');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const swaggerDocument = YAML.load("./swagger.yaml");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-morgan.token('host', function (req, res) {
+morgan.token("host", function (req, res) {
   return req.hostname;
-})
+});
 morgan.token("wbdaccess", "User trying to access the :url");
 
-let logsinfo = fsr.getStream({ filename: "logs/test.log", frequency: "1h", verbose: true });
+let logsinfo = fsr.getStream({
+  filename: "logs/test.log",
+  frequency: "1h",
+  verbose: true,
+});
 
-app.use(morgan('wbdaccess', { stream: logsinfo }))
+app.use(morgan("wbdaccess", { stream: logsinfo }));
 //End Swagger and Morgan
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: "./config.env" });
 
 app.use(cors());
 
@@ -53,8 +58,9 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/food", foodRoutes);
 app.use("/api/v1/restaurant", restaurantRoutes);
 app.use("/api/v1/order", orderRoutes);
+app.use("/payment", paymentRoutes);
 
-app.all('*', (req, res, next) => {
+app.all("*", (req, res, next) => {
   return next(HTTPErrors(404, `Can't find ${req.originalUrl} on this server!`));
 });
 
@@ -65,21 +71,21 @@ app.use(function (err, req, res, next) {
     // handle http err
     messageToSend = { message: err.message };
 
-    if (process.env.NODE_ENV === 'development') messageToSend.stack = err.stack;
+    if (process.env.NODE_ENV === "development") messageToSend.stack = err.stack;
 
     messageToSend.status = err.statusCode;
   } else {
     messageToSend = { message: err.message };
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       messageToSend.stack = err.stack;
     }
 
     messageToSend.status = 400;
   }
 
-  if (process.env.NODE_ENV === 'production' && !messageToSend) {
-    messageToSend = { message: 'Something went very wrong', status: 500 };
+  if (process.env.NODE_ENV === "production" && !messageToSend) {
+    messageToSend = { message: "Something went very wrong", status: 500 };
   }
 
   if (messageToSend) {
