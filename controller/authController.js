@@ -4,6 +4,11 @@ const createError = require('http-errors');
 const request = require('request');
 const validator = require('validator');
 const User = require('./../models/userModel')
+const { uploadFile, getFileStream } = require('./../utils/s3')
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+const multer = require('multer')
 
 const { OAuth2Client } = require('google-auth-library');
 const clientID = process.env.CLIENT_ID;
@@ -223,22 +228,41 @@ exports.getLoggedUserInfo = async (req, res) => {
     })
 }
 
-exports.image = async (req, res) => {
-    try {
-        console.log(id);
-        console.log(req.body.filelocation);
-        // const data = await AuctionEvent.findOneAndUpdate({ _id: id }, {
-        //     $set: { "coverImage": filelocation }
-        // },
-        //     { new: true });
+// const multerFilter = (req, file, cb) => {
+//     if (file.mimetype.startsWith('image') || file.mimetype.startsWith('video')) {
+//         cb(null, true);
+//     } else {
+//         cb(
+//             new AppError(
+//                 'Neither an image nor a video! Please upload images or video.',
+//                 400
+//             ),
+//             false
+//         );
+//     }
+// };
 
+exports.uploadImage = async (req, res) => {
+    try {
+        const file = req.file
+        const result = await uploadFile(file)
+        await unlinkFile(file.path)
+        // console.log(result)
+        // const description = req.body.description
         res.status(200).json({
-            status: 200,
-            body: req.body.filelocation
+            statusCode: 200,
+            body: `/images/${result.Key}`
         })
     } catch (e) {
         throw new createError(e.statusCode, e.message);
     }
+}
+
+exports.getImage = (req, res) => {
+    const key = req.params.key
+    const readStream = getFileStream(key)
+
+    readStream.pipe(res)
 }
 
 exports.logout = (req, res) => {
