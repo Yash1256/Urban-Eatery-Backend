@@ -1,5 +1,6 @@
 const Order = require("./../models/orderModel");
 const Food = require("./../models/foodModel");
+const bson = require('bson')
 
 exports.placeOrder = async (req, res) => {
     try {
@@ -10,6 +11,16 @@ exports.placeOrder = async (req, res) => {
         if (address && restaurant && foodItems[0] && totalPrice) {
             for (let i = 0; i < foodItems.length; i++) {
                 let foodItem = await Food.findById(foodItems[i].itemId);
+                if (!foodItem) {
+                    throw new Error("Wrong food Ordered !!! Order can't be placed ");
+                }
+                if (foodItem.quantity - foodItems[i].quantity < 0) {
+                    throw new Error("Wrong food quantity !!! Order can't be placed ");
+                }
+            }
+
+            for (let i = 0; i < foodItems.length; i++) {
+                let foodItem = await Food.findById(foodItems[i].itemId);
                 if (foodItem.quantity - foodItems[i].quantity < 0) {
                     throw new Error("Wrong food quantity !!! Order can't be placed ");
                 } else {
@@ -18,7 +29,7 @@ exports.placeOrder = async (req, res) => {
                 }
             }
 
-            order = await Order.create({ address, restaurant, foodItems, totalPrice })
+            order = await Order.create({ userId, address, restaurant, foodItems, totalPrice })
         }
 
         res.status(200).json({
@@ -60,8 +71,7 @@ exports.cancelOrder = async (req, res) => {
 
 exports.pastOrders = async (req, res) => {
     try {
-        const userId = req.user;
-        const result = await Order.find({ userId });
+        const result = await Order.find({ userId: bson.ObjectId(req.user) });
 
         res.status(200).json({
             status: "success",
