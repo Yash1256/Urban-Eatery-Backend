@@ -223,6 +223,24 @@ exports.getLoggedUserInfo = async (req, res) => {
     })
 }
 
+exports.image = async (req, res) => {
+    try {
+        console.log(id);
+        console.log(req.body.filelocation);
+        // const data = await AuctionEvent.findOneAndUpdate({ _id: id }, {
+        //     $set: { "coverImage": filelocation }
+        // },
+        //     { new: true });
+
+        res.status(200).json({
+            status: 200,
+            body: req.body.filelocation
+        })
+    } catch (e) {
+        throw new createError(e.statusCode, e.message);
+    }
+}
+
 exports.logout = (req, res) => {
     res.status(200).json({ statusCode: 200, token: null });
 };
