@@ -12,7 +12,7 @@ const foodSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Restaurant",
   },
-  qty: Number,
+  quantity: Number,
 });
 
 const Food = mongoose.model("Food", foodSchema, "Food Model");
