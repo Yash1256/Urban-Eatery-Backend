@@ -96,33 +96,33 @@ describe('Restaurant APIs', function () {
       });
   });
 
-  it('Update a particular restaurant details', function (done) {
-    this.timeout(0);
-    chai
-      .request(server)
-      .patch('/api/v1/restaurant/updateRestaurant/62684f96bc042c0a179a26c1')
-      .set('Authorization', 'Bearer ' + token)
-      .send({
-        name: 'Swarnmukhi2',
-        phoneNumber: '1234567890',
-        address: 'Sri city, Chittoor',
-      })
-      .then((res) => {
-        expect(res).to.have.status(200);
-        // console.log(res);
-        expect(res.body).to.have.nested.include({
-          // confirming the response from the updateFood controller
-          status: 'success',
-        });
+  // it('Update a particular restaurant details', function (done) {
+  //   this.timeout(0);
+  //   chai
+  //     .request(server)
+  //     .patch('/api/v1/restaurant/updateRestaurant/62684f96bc042c0a179a26c1')
+  //     .set('Authorization', 'Bearer ' + token)
+  //     .send({
+  //       name: 'Swarnmukhi2',
+  //       phoneNumber: '1234567890',
+  //       address: 'Sri city, Chittoor',
+  //     })
+  //     .then((res) => {
+  //       expect(res).to.have.status(200);
+  //       // console.log(res);
+  //       expect(res.body).to.have.nested.include({
+  //         // confirming the response from the updateFood controller
+  //         status: 'success',
+  //       });
 
-        let data = res.body.data;
-        data.should.be.a('object');
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-    done();
-  });
+  //       let data = res.body.data;
+  //       data.should.be.a('object');
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err);
+  //     });
+  //   done();
+  // });
 
   //   it('Delete a food item details', function (done) {
   //     this.timeout(0);
