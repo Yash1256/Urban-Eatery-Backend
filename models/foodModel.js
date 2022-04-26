@@ -8,6 +8,7 @@ const foodSchema = new mongoose.Schema({
   story: String,
   price: Number,
   restaurant_name: String,
+  couponAccepted: Boolean,
   restaurant: {
     type: mongoose.Schema.ObjectId,
     ref: "Restaurant",

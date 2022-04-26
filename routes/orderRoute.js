@@ -9,4 +9,8 @@ router.post("/placeOrder", orderController.placeOrder);
 router.get("/cancelOrder/:orderId", orderController.cancelOrder);
 router.get("/pastOrders", orderController.pastOrders);
 
+router.get(authController.restrictTo("admin"))
+router.get("/orderDashboard", orderController.orderDashBoard)
+router.get("/allOrders", orderController.getAllOrder)
+
 module.exports = router;

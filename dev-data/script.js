@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Food = require("./../models/foodModel");
 const Restaurant = require("./../models/restaurantModel");
 
-const DB = "mongodb+srv://yash1256:yash1256@urban-eatery.wf7ld.mongodb.net/UrbanEatery?retryWrites=true&w=majority"
+const DB = "mongodb+srv://nishi:1BiIdsSOgboS6OwP@cluster0.zjfve.mongodb.net/urbanEatery?retryWrites=true&w=majority?retryWrites=true&w=majority"
 
 mongoose
   .connect(DB, {

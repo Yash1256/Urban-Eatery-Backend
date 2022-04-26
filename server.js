@@ -12,6 +12,8 @@ const orderRoutes = require("./routes/orderRoute");
 const userRoutes = require("./routes/userRoute");
 const paymentRoutes = require("./routes/paymentRoute");
 
+require('./services/cache');
+
 //Morgan 
 const logger = require("./middlewares/logs");
 app.use(logger);
@@ -112,6 +114,6 @@ app.use(function (err, req, res, next) {
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, () => {
+module.exports = app.listen(port, () => {
   console.log(`Sever is listening on port ${port}`);
 });

@@ -1,16 +1,17 @@
 const Restaurant = require("./../models/restaurantModel");
 const bson = require('bson')
 
+
 exports.createRestaurant = async (req, res) => {
   try {
-    const { name, phoneNumber, address } = req.body;
+    const { name, phoneNumber, address, category } = req.body;
 
     if (phoneNumber.length != 10) {
       throw new Error("Phone Number must be of Length 10");
     }
 
     if (name && address) {
-      const result = await Restaurant.create({ name, phoneNumber, address });
+      const result = await Restaurant.create({ name, phoneNumber, address, category });
 
 
       return res.status(200).json({
@@ -34,7 +35,7 @@ exports.createRestaurant = async (req, res) => {
 
 exports.getRestaurantById = async (req, res) => {
   try {
-    const result = await Restaurant.findById(req.params.id);
+    const result = await Restaurant.findById(req.params.id).cache();
 
     if (!result) {
       return res.status(400).json({
@@ -57,7 +58,7 @@ exports.getRestaurantById = async (req, res) => {
 
 exports.getAllRestaurant = async (req, res) => {
   try {
-    const result = await Restaurant.find();
+    const result = await Restaurant.find().cache();
 
     res.status(200).json({
       status: "success",
