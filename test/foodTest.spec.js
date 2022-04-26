@@ -29,36 +29,36 @@ describe('Food APIs', function () {
       });
   });
 
-  it('get a particular food', function (done) {
-    chai
-      .request(server)
-      .get('/api/v1/food/foodItem/6249eb83a5ac4aa8584aa81a') // sending the reqeust for a particular food item
-      .set('Authorization', 'Bearer ' + token)
-      .end((err, res) => {
-        let data = res.body.data;
-        res.body.should.have.status('success');
-        expect(res.body).to.have.property('data');
-        res.body.should.be.a('object');
-        data.should.be.a('object');
-        expect(data).to.have.all.keys(
-          // checking for all properties that should be send in response
-          '_id',
-          'name',
-          'category',
-          'img',
-          'description',
-          'story',
-          'price',
-          'restaurant_name',
-          'restaurant',
-          '__v'
-        );
-        expect(data).to.have.nested.include({
-          name: 'Begal and Cream Cheese',
-        });
-        done();
-      });
-  });
+  // it('get a particular food', function (done) {
+  //   chai
+  //     .request(server)
+  //     .get('/api/v1/food/foodItem/6249eb83a5ac4aa8584aa81a') // sending the reqeust for a particular food item
+  //     .set('Authorization', 'Bearer ' + token)
+  //     .end((err, res) => {
+  //       let data = res.body.data;
+  //       res.body.should.have.status('success');
+  //       expect(res.body).to.have.property('data');
+  //       res.body.should.be.a('object');
+  //       data.should.be.a('object');
+  //       expect(data).to.have.all.keys(
+  //         // checking for all properties that should be send in response
+  //         '_id',
+  //         'name',
+  //         'category',
+  //         'img',
+  //         'description',
+  //         'story',
+  //         'price',
+  //         'restaurant_name',
+  //         'restaurant',
+  //         '__v'
+  //       );
+  //       expect(data).to.have.nested.include({
+  //         name: 'Begal and Cream Cheese',
+  //       });
+  //       done();
+  //     });
+  // });
 
   //   it('create a new food item', function () {
   //     chai
