@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha 'test/**/*.spec.js'",
+    "test": "mocha 'test/**/*.spec.js' --exit",
     "test-single": "mocha",
     "test-report": "mocha test/**/*.spec.js --reporter mochawesome --require mochawesome/register"
   },
