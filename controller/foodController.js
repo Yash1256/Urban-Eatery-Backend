@@ -2,20 +2,20 @@ const foodModel = require("./../models/foodModel");
 const Restaurant = require("./../models/restaurantModel");
 
 
-// exports.getAllFoods = async (req, res) => {
-//   try {
-//     const result = await foodModel.find().cache();
-//     res.status(200).json({
-//       status: "success",
-//       data: result
-//     })
-//   } catch (err) {
-//     return res.status(400).json({
-//       status: "fail",
-//       message: err.message,
-//     })
-//   }
-// }
+exports.getAllFoods = async (req, res) => {
+  try {
+    const result = await foodModel.find().cache();
+    res.status(200).json({
+      status: "success",
+      data: result
+    })
+  } catch (err) {
+    return res.status(400).json({
+      status: "fail",
+      message: err.message,
+    })
+  }
+}
 
 exports.getFoodById = async (req, res) => {
   try {
