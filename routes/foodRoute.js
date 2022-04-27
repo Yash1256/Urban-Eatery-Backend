@@ -5,7 +5,7 @@ const authController = require('./../controller/authController');
 const router = express.Router();
 
 router.use(authController.protect);
-// router.get("/foodItem", foodController.getAllFoods);
+router.get("/foodItem", foodController.getAllFoods);
 router.get("/foodItem/:id", foodController.getFoodById);
 router.get("/getFoodbyCategory/:category", foodController.getFoodbyCategory);
 router.get('/search/:keyword', foodController.searchFood);
