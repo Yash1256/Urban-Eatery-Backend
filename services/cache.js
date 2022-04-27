@@ -3,6 +3,7 @@ const redis = require('redis');
 const util = require('util');
 
 const redisUrl = 'redis://127.0.0.1:6379'
+// const client = redis.createClient({ socket: { port: 6379, host: 'myapp-redis' } })
 const client = redis.createClient(redisUrl);
 (async () => {
     await client.connect();
