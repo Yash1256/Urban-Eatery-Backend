@@ -8,7 +8,6 @@ const { uploadFile, getFileStream } = require('./../utils/s3')
 const fs = require('fs')
 const util = require('util')
 const unlinkFile = util.promisify(fs.unlink)
-const multer = require('multer')
 
 const { OAuth2Client } = require('google-auth-library');
 const clientID = process.env.CLIENT_ID;

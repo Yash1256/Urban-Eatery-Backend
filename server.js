@@ -44,7 +44,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 
 app.use(cors());
 
@@ -114,6 +114,6 @@ app.use(function (err, req, res, next) {
 
 const port = process.env.PORT || 3001;
 
-module.exports = app.listen(port, () => {
+module.exports = app.listen(port, '0.0.0.0', () => {
   console.log(`Sever is listening on port ${port}`);
 });

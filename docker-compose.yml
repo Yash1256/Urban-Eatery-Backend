@@ -1,0 +1,13 @@
+version: '3'
+services:
+  myapp:
+    container_name: backend-container
+    restart: always
+    build: .
+    ports:
+      - '3001:3001'
+    links:
+      - redis
+  redis:
+    container_name: myapp-redis
+    image: 'redis:4.0.11'
