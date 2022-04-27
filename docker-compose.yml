@@ -1,64 +1,13 @@
-version: '3.8'
-
+version: '3'
 services:
-  server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-    image: urbaneatery-server
-    container_name: urbaneatery-server
-    # command: /usr/src/app/node_modules/.bin/nodemon server.js
-    command: npm start
-    volumes:
-      - ./server/:/usr/src/app
-      - /usr/src/app/node_modules
+  myapp:
+    container_name: backend-container
+    restart: always
+    build: .
     ports:
-      - "3001:3001"
+      - '3001:3001'
     links:
       - redis
-    env_file: ./server/config.env
-    environment:
-      - NODE_ENV=development
-    networks:
-      - app-network
-
   redis:
     container_name: myapp-redis
     image: 'redis:4.0.11'
-
-  # mongo:
-  #   image: mongo
-  #   volumes:
-  #     - data-volume:/data/db
-  #   ports:
-  #     - "27017:27017"
-  #   networks:
-  #     - app-network
-
-  client:
-    build:
-      context: ./Frontend
-      dockerfile: Dockerfile
-    image: myapp-client
-    tty: true
-    container_name: myapp-react-client
-    command: npm start
-    volumes:
-      - ./Frontend/:/usr/app
-      - /usr/app/node_modules
-    depends_on:
-      - server
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
-
-volumes:
-  data-volume:
-  node_modules:
-  web-root:
-    driver: local
