@@ -44,7 +44,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-dotenv.config();
+dotenv.config({ path: './config.env' });
 
 app.use(cors());
 
