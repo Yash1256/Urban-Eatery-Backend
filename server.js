@@ -27,18 +27,6 @@ app.use(morgan('dev'))
 const swaggerDocument = YAML.load('./swagger.yaml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// const morgan = require('morgan');
-// const fsr = require('file-stream-rotator');
-// morgan.token('host', function (req, res) {
-//   return req.hostname;
-// })
-// morgan.token("wbdaccess", "User trying to access the :url");
-
-// let logsinfo = fsr.getStream({ filename: "logs/test.log", frequency: "1h", verbose: true });
-
-// app.use(morgan('combined'))
-// app.use(morgan('wbdaccess', { stream: logsinfo }))
-
 //End Swagger and Morgan
 
 app.use(bodyParser.urlencoded({ extended: true }));
